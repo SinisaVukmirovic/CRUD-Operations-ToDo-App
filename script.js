@@ -22,6 +22,14 @@ let formValidation = () => {
       msg.innerHTML = "";
 
       acceptData();
+
+      add.setAttribute('data-bs-dismiss', 'modal');
+      // simulating mouse click, to make the modal close after ADD btn click
+      add.click();
+
+      (() => {
+        add.setAttribute('data-bs-dismiss', '');
+      })()
     }
 };
 
@@ -48,6 +56,8 @@ let createTast = () => {
           </span>
         </div>
     `;
+
+    form.reset();
 }
 
 
