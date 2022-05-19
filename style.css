@@ -59,6 +59,9 @@ body {
   cursor: pointer;
 }
 
+#msg {
+  color: red;
+}
 
 
 

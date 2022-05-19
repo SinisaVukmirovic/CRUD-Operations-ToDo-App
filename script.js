@@ -1,5 +1,27 @@
+let form = document.querySelector("#form");
+let textInput = document.querySelector("#textInput");
+let dateInput = document.querySelector("#dateInput");
+let textarea = document.querySelector("#textarea");
+let msg = document.querySelector("#msg");
+let tasks = document.querySelector("#tasks");
+let add = document.querySelector("#add");
 
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
+    formValidation();
+});
+  
+let formValidation = () => {
+    // if (textInput.value === "") {
+    if (!textInput.value) {
+      console.log("failure");
+      msg.innerHTML = "Task cannot be blank";
+    } else {
+      console.log("success");
+      msg.innerHTML = "";
+    }
+};
 
 
 
