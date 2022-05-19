@@ -31,9 +31,24 @@ let acceptData = () => {
     data['text'] = textInput.value;
     data['date'] = dateInput.value;
     data['description'] = textarea.value;
+
+    createTast();
 }
 
-console.log(data)
+let createTast = () => {
+    tasks.innerHTML += `
+        <div>
+          <span class="fw-bold">${data.text}</span>
+          <span class="small text-secondary">${data.date}</span>
+          <p>${data.description}</p>
+  
+          <span class="options">
+            <i onClick= "editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
+            <i onClick ="deleteTask(this);createTasks()" class="fas fa-trash-alt"></i>
+          </span>
+        </div>
+    `;
+}
 
 
 
