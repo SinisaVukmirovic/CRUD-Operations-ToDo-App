@@ -6,7 +6,7 @@ let msg = document.querySelector("#msg");
 let tasks = document.querySelector("#tasks");
 let add = document.querySelector("#add");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", e => {
     e.preventDefault();
 
     formValidation();
@@ -33,38 +33,60 @@ let formValidation = () => {
     }
 };
 
-let data = {};
+// let data = {};
+let data = [];
+
 
 let acceptData = () => {
-    data['text'] = textInput.value;
-    data['date'] = dateInput.value;
-    data['description'] = textarea.value;
+    data.push({
+      text: textInput.value,
+      date: dateInput.value,
+      description: textarea.value
+    });
 
-    createTast();
+    localStorage.setItem('CRUD-App-Data', JSON.stringify(data));
+    // console.log(data) 
+
+    // data['text'] = textInput.value;
+    // data['date'] = dateInput.value;
+    // data['description'] = textarea.value;
+
+    createTasks();
 }
 
-let createTast = () => {
-    tasks.innerHTML += `
-        <div>
-          <span class="fw-bold">${data.text}</span>
-          <span class="small text-secondary">${data.date}</span>
-          <p>${data.description}</p>
+let createTasks = () => {
+    tasks.innerHTML = '';
+
+    data.map((x, y) => {
+
+      return tasks.innerHTML += `
+        <div id=${y}>
+          <span class="fw-bold">${x.text}</span>
+          <span class="small text-secondary">${x.date}</span>
+          <p>${x.description}</p>
   
           <span class="options">
             <i onClick= "editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
-            <i onClick ="deleteTask(this)" class="fas fa-trash-alt"></i>
+            <i onClick ="deleteTask(this); createTasks()" class="fas fa-trash-alt"></i>
           </span>
         </div>
-    `;  
+      `; 
+    });
 
     form.reset();
 }
 
-let deleteTask = (e) => {
+let deleteTask = e => {
   e.parentElement.parentElement.remove();
+
+  data.splice(e.parentElement.parentElement.id, 1);
+
+  localStorage.setItem('CRUD-App-Data', JSON.stringify(data));
+console.log(data)
+  // console.log(e.parentElement.parentElement.id)
 }
 
-let editTask = (e) => {
+let editTask = e => {
   let selectedTask = e.parentElement.parentElement;
 
   textInput.value = selectedTask.children[0].innerHTML;
@@ -74,6 +96,12 @@ let editTask = (e) => {
   selectedTask.remove();
 }
 
+(() => {
+  data = JSON.parse(localStorage.getItem('CRUD-App-Data')) || [];
+
+  createTasks();
+  console.log(data);
+})();
 
 
 // logic for dummy app
