@@ -82,7 +82,7 @@ let deleteTask = e => {
   data.splice(e.parentElement.parentElement.id, 1);
 
   localStorage.setItem('CRUD-App-Data', JSON.stringify(data));
-console.log(data)
+
   // console.log(e.parentElement.parentElement.id)
 }
 
@@ -93,7 +93,8 @@ let editTask = e => {
   dateInput.value = selectedTask.children[1].innerHTML;
   textarea.value = selectedTask.children[2].innerHTML;
 
-  selectedTask.remove();
+  // selectedTask.remove();
+  deleteTask(e);
 }
 
 (() => {
