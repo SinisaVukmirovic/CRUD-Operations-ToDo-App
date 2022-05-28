@@ -6,4 +6,4 @@
 
 ##### Form input fields can be reseted with .reset() method on form element.
 
-##### We can "simulating" mouse click, without actually clicking with mouse, with .click() method
+##### We can "simulating" mouse click, without actually clicking with mouse, with .click() methods
